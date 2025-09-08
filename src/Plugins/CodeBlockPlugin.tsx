@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
-import { CodeSquare } from 'react-bootstrap-icons'
-import { IconButton } from '@chakra-ui/react'
-import { useLexicalComposerContext } from '@lexical/react/LexicalComposerContext'
-import { registerCodeHighlighting, $createCodeNode } from '@lexical/code'
-import { $getSelection, $isRangeSelection } from 'lexical'
-import { $wrapNodes } from '@lexical/selection'
+import React, { useEffect } from "react"
+import { CodeSquare } from "react-bootstrap-icons"
+import { IconButton } from "@chakra-ui/react"
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext"
+import { registerCodeHighlighting, $createCodeNode } from "@lexical/code"
+import { $getSelection, $isRangeSelection } from "lexical"
+import { $wrapNodes } from "@lexical/selection"
 
 export default function CodeBlockPlugin() {
   const [editor] = useLexicalComposerContext()
@@ -31,6 +31,7 @@ export default function CodeBlockPlugin() {
         variant="ghost"
         color="#333"
         onClick={onAddCodeBlock}
+        paddingBottom={1}
       />
     </div>
   )
