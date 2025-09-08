@@ -1,0 +1,60 @@
+{
+  "name": "my-react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@chakra-ui/react": "^2.10.9",
+    "@emotion/css": "^11.13.5",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@lexical/react": "^0.33.1",
+    "@tanstack/react-query": "^5.85.0",
+    "@tryretool/custom-component-support": "latest",
+    "framer-motion": "^6.5.1",
+    "lexical": "^0.33.1",
+    "react": "^19.1.1",
+    "react-bootstrap-icons": "^1.11.6",
+    "react-dom": "^19.1.1"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "npx retool-ccl dev",
+    "deploy": "npx retool-ccl deploy"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.57.1",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "eslint": "^8.57.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.3.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^7.18.0",
+    "vite": "^7.1.2"
+  },
+  "retoolCustomComponentLibraryConfig": {
+    "name": "RTE",
+    "label": "RTE",
+    "description": "",
+    "entryPoint": "src/index.tsx",
+    "outputPath": "dist"
+  }
+}
