@@ -25,7 +25,7 @@ interface RichTextEditorProps {
   onChange: (value: string) => void
   placeholder?: string
   name: string
-  setName: (newValue: string) => void
+  setNote: (newValue: string) => void
 }
 
 const urlRegExp = new RegExp(
@@ -37,7 +37,7 @@ export function validateUrl(url: string): boolean {
 }
 
 export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
-  function RichTextEditor({ value, onChange, placeholder, name, setName }) {
+  function RichTextEditor({ value, onChange, placeholder, name, setNote }) {
     const initialConfig = useMemo(
       () => ({
         namespace: name,
@@ -105,7 +105,7 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
           <ClickableLinkPlugin />
           {/* Uncomment if you want live updates */}
           {/* <CustomOnChangePlugin value={value} onChange={onChange} /> */}
-          <SaveHtmlPlugin setName={setName} />
+          <SaveHtmlPlugin setNote={setNote} />
         </LexicalComposer>
       </div>
     )

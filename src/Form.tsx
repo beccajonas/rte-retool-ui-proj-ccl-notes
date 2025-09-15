@@ -3,16 +3,16 @@ import { Box } from "@chakra-ui/react"
 import { RichTextEditor } from "./RichTextEditor"
 
 type ChildProps = {
-  setName: (newValue: string) => void
+  setNote: (newValue: string) => void
 }
 
-export default function Form({ setName }: ChildProps) {
+export default function Form({ setNote }: ChildProps) {
   const [value, setValue] = useState("")
 
   return (
     <Box p={1}>
       <RichTextEditor
-        setName={setName}
+        setNote={setNote}
         placeholder="Type here"
         name="text"
         value={value}

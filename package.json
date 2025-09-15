@@ -51,8 +51,8 @@
     "vite": "^7.1.2"
   },
   "retoolCustomComponentLibraryConfig": {
-    "name": "RTE",
-    "label": "RTE",
+    "name": "RTENotes",
+    "label": "RTE Notes",
     "description": "",
     "entryPoint": "src/index.tsx",
     "outputPath": "dist"
