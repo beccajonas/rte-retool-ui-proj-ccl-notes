@@ -214,12 +214,14 @@ export default function LinkPlugin() {
           onClick={handleClick}
         />
       </PopoverTrigger>
-      <PopoverContent width="260px">
+      <PopoverContent width="200px">
         <PopoverArrow />
         <PopoverCloseButton onClick={handleClose} />
-        <PopoverHeader fontSize="xs">Insert Link</PopoverHeader>
-        <PopoverBody>
-          <div style={{ display: "grid", gap: 6 }}>
+        <PopoverHeader fontSize="xs" py={2}>
+          Insert Link
+        </PopoverHeader>
+        <PopoverBody py={2}>
+          <div style={{ display: "grid", gap: 4 }}>
             <input
               type="text"
               placeholder={selectedText || "Link Text"}
@@ -227,10 +229,10 @@ export default function LinkPlugin() {
               onChange={(e) => setLinkText(e.target.value)}
               id="linkText"
               style={{
-                fontSize: 12,
-                padding: 6,
+                fontSize: 11,
+                padding: 4,
                 border: "1px solid #ddd",
-                borderRadius: 4
+                borderRadius: 3
               }}
             />
             <input
@@ -240,10 +242,10 @@ export default function LinkPlugin() {
               onChange={(e) => setLinkURL(e.target.value)}
               id="linkURL"
               style={{
-                fontSize: 12,
-                padding: 6,
+                fontSize: 11,
+                padding: 4,
                 border: "1px solid #ddd",
-                borderRadius: 4
+                borderRadius: 3
               }}
             />
             <div>
