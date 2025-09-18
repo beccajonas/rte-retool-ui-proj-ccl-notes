@@ -13,7 +13,7 @@ export default function Form({ setNote }: ChildProps) {
     <Box p={1}>
       <RichTextEditor
         setNote={setNote}
-        placeholder="Type here"
+        placeholder="Write note here"
         name="text"
         value={value}
         onChange={(newValue) => setValue(newValue)}

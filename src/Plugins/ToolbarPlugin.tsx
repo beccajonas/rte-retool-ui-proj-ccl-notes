@@ -1,4 +1,12 @@
-import { Box, ButtonGroup, Flex, IconButton, Select } from "@chakra-ui/react"
+import {
+  Box,
+  ButtonGroup,
+  Flex,
+  IconButton,
+  Select,
+  Button
+} from "@chakra-ui/react"
+import { ArrowClockwise, ArrowCounterclockwise } from "react-bootstrap-icons"
 import {
   LOW_PRIORIRTY,
   RICH_TEXT_OPTIONS,
@@ -25,8 +33,14 @@ import { $isListNode, ListNode } from "@lexical/list"
 import CodeBlockPlugin from "./CodeBlockPlugin"
 import ImagePlugin from "./ImagePlugin"
 import LinkPlugin from "./LinkPlugin"
+import { $generateHtmlFromNodes } from "@lexical/html"
+import { $getRoot, $createParagraphNode } from "lexical"
 
-export default function ToolbarPlugin() {
+type ToolbarPluginProps = {
+  setNote: (newValue: string) => void
+}
+
+export default function ToolbarPlugin({ setNote }: ToolbarPluginProps) {
   const [editor] = useLexicalComposerContext()
   const [disableMap, setDisableMap] = useState<{ [id: string]: boolean }>({
     [RichTextAction.Undo]: true,
@@ -134,14 +148,14 @@ export default function ToolbarPlugin() {
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough")
         break
       }
-      case RichTextAction.Superscript: {
-        editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript")
-        break
-      }
-      case RichTextAction.Subscript: {
-        editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript")
-        break
-      }
+      // case RichTextAction.Superscript: {
+      //   editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript")
+      //   break
+      // }
+      // case RichTextAction.Subscript: {
+      //   editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript")
+      //   break
+      // }
       case RichTextAction.Highlight: {
         editor.dispatchCommand(FORMAT_TEXT_COMMAND, "highlight")
         break
@@ -154,18 +168,18 @@ export default function ToolbarPlugin() {
         editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left")
         break
       }
-      case RichTextAction.RightAlign: {
-        editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")
-        break
-      }
-      case RichTextAction.CenterAlign: {
-        editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")
-        break
-      }
-      case RichTextAction.JustifyAlign: {
-        editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")
-        break
-      }
+      // case RichTextAction.RightAlign: {
+      //   editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right")
+      //   break
+      // }
+      // case RichTextAction.CenterAlign: {
+      //   editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center")
+      //   break
+      // }
+      // case RichTextAction.JustifyAlign: {
+      //   editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify")
+      //   break
+      // }
       case RichTextAction.Undo: {
         editor.dispatchCommand(UNDO_COMMAND, undefined)
         break
@@ -184,37 +198,73 @@ export default function ToolbarPlugin() {
         }
       : {}
 
+  const saveHtml = () => {
+    let htmlString = ""
+
+    // 1️⃣ Generate + clear inside Lexical update
+    editor.update(() => {
+      htmlString = $generateHtmlFromNodes(editor)
+      console.log("Editor HTML:", htmlString)
+      setNote(htmlString)
+
+      // Clear editor after saving
+      const root = $getRoot()
+      root.clear()
+      root.append($createParagraphNode())
+    })
+  }
+
   return (
     <Box>
-      <ButtonGroup size="xs" isAttached variant="ghost" color="#444">
-        {RICH_TEXT_OPTIONS.map((option, index) => {
-          const { id, label, icon, fontSize } = option
-          if (id === RichTextAction.Divider) {
-            return <Divider key={`divider-${index}`} />
-          }
-          return (
-            <IconButton
-              key={id}
-              aria-label={label as string}
-              icon={icon}
-              fontSize={fontSize}
-              onClick={() => onAction(id)}
-              isDisabled={disableMap[id]}
-              {...getSelectedBtnProps(selectionMap[id])}
-            />
-          )
-        })}
+      <Flex justify="space-between" align="center">
+        <ButtonGroup size="xs" isAttached variant="ghost" color="#444">
+          {RICH_TEXT_OPTIONS.map(({ id, label, icon, fontSize }) =>
+            id === RichTextAction.Divider1 ||
+            id === RichTextAction.Divider2 ||
+            id === RichTextAction.Divider3 ? (
+              <Divider key={id} />
+            ) : (
+              <IconButton
+                key={id}
+                aria-label={label as string}
+                icon={icon}
+                fontSize={fontSize}
+                onClick={() => onAction(id)}
+                isDisabled={disableMap[id]}
+                {...getSelectedBtnProps(selectionMap[id])}
+              />
+            )
+          )}
 
-        {/* Add your plugins inline in the same ButtonGroup */}
-        <Divider />
-        <ListPlugin blockType={blockType} setBlockType={setBlockType} />
-        <Divider />
-        <CodeBlockPlugin />
-        <Divider />
-        <ImagePlugin />
-        {/* <Divider /> */}
-        {/* <LinkPlugin /> */}
-      </ButtonGroup>
+          {/* Add your plugins inline in the same ButtonGroup */}
+          <Divider key={"divider-plugin-1"} />
+          <ListPlugin blockType={blockType} setBlockType={setBlockType} />
+          <Divider key={"divider-plugin-2"} />
+          <CodeBlockPlugin />
+          <Divider key={"divider-codeblock-link"} />
+          <LinkPlugin />
+          <Divider key={"divider-undo-redo"} />
+          <IconButton
+            key={RichTextAction.Undo}
+            aria-label="Undo"
+            icon={<ArrowCounterclockwise />}
+            onClick={() => onAction(RichTextAction.Undo)}
+            isDisabled={disableMap[RichTextAction.Undo]}
+          />
+          <IconButton
+            key={RichTextAction.Redo}
+            aria-label="Redo"
+            icon={<ArrowClockwise />}
+            onClick={() => onAction(RichTextAction.Redo)}
+            isDisabled={disableMap[RichTextAction.Redo]}
+          />
+        </ButtonGroup>
+
+        {/* Send button aligned to the right */}
+        <Button colorScheme="blue" size="xs" onClick={saveHtml}>
+          Send Note
+        </Button>
+      </Flex>
     </Box>
   )
 }

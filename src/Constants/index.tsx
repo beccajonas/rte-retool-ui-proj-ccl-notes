@@ -3,12 +3,6 @@ import {
   ArrowCounterclockwise,
   Code,
   Highlighter,
-  Justify,
-  JustifyLeft,
-  JustifyRight,
-  Subscript,
-  Superscript,
-  TextCenter,
   TypeBold,
   TypeItalic,
   TypeStrikethrough,
@@ -28,7 +22,9 @@ export enum RichTextAction {
   CenterAlign = "centerAlign",
   RightAlign = "rightAlign",
   JustifyAlign = "justifyAlign",
-  Divider = "button-divider",
+  Divider1 = "button-divider-1",
+  Divider2 = "button-divider-2",
+  Divider3 = "button-divider-3",
   Undo = "undo",
   Redo = "redo"
 }
@@ -37,7 +33,7 @@ export const RICH_TEXT_OPTIONS = [
   { id: RichTextAction.Bold, icon: <TypeBold />, label: "Bold" },
   { id: RichTextAction.Italics, icon: <TypeItalic />, label: "Italics" },
   { id: RichTextAction.Underline, icon: <TypeUnderline />, label: "Underline" },
-  { id: RichTextAction.Divider },
+  { id: RichTextAction.Divider1 },
   {
     id: RichTextAction.Highlight,
     icon: <Highlighter />,
@@ -50,52 +46,9 @@ export const RICH_TEXT_OPTIONS = [
     label: "Strikethrough"
   },
   {
-    id: RichTextAction.Superscript,
-    icon: <Superscript />,
-    label: "Superscript"
-  },
-  {
-    id: RichTextAction.Subscript,
-    icon: <Subscript />,
-    label: "Subscript"
-  },
-  {
     id: RichTextAction.Code,
     icon: <Code />,
     label: "Code"
-  },
-  { id: RichTextAction.Divider },
-  {
-    id: RichTextAction.LeftAlign,
-    icon: <JustifyLeft />,
-    label: "Align Left"
-  },
-  {
-    id: RichTextAction.CenterAlign,
-    icon: <TextCenter />,
-    label: "Align Center"
-  },
-  {
-    id: RichTextAction.RightAlign,
-    icon: <JustifyRight />,
-    label: "Align Right"
-  },
-  {
-    id: RichTextAction.JustifyAlign,
-    icon: <Justify />,
-    label: "Align Justify"
-  },
-
-  { id: RichTextAction.Divider },
-  {
-    id: RichTextAction.Undo,
-    icon: <ArrowCounterclockwise />,
-    label: "Undo"
-  },
-  {
-    id: RichTextAction.Redo,
-    icon: <ArrowClockwise />,
-    label: "Redo"
   }
 ]
 
