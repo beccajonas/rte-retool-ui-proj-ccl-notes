@@ -61,25 +61,32 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = React.memo(
 
     return (
       <div className="editor-container">
+        {/* 
+        EDITOR SCROLL BEHAVIOR CONFIGURATION:
+        - Editor starts at minHeight (135px) and grows with content
+        - Stops growing at maxHeight (300px) and becomes scrollable
+        - To change behavior: modify minHeight, maxHeight, and overflow properties below
+      */}
         <LexicalComposer initialConfig={initialConfig}>
           <ToolBarPlugin setNote={setNote} />
           <div
             className={css({
               position: "relative",
-              height: "135px",
+              minHeight: "135px", // Minimum height - editor starts at this size
+              maxHeight: "300px", // Maximum height - editor stops growing at this size
               border: "1px solid black",
               borderRadius: "4px",
-              overflow: "hidden"
+              overflow: "auto" // Allows scrolling when content exceeds maxHeight
             })}
           >
             <RichTextPlugin
               contentEditable={
                 <ContentEditable
                   className={css({
-                    height: "100%",
+                    minHeight: "100%", // Allows content to grow beyond container height
                     fontSize: 12,
                     padding: 8,
-                    overflowY: "auto",
+                    overflowY: "auto", // Enables vertical scrolling when needed
                     outline: "none"
                   })}
                 />
